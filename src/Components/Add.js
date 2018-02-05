@@ -13,22 +13,36 @@ class Add extends Component{
   renderAddList = () => {
     let target = this.props.target;
     if (Object.keys(target).length === 0) {
-      return <p>Välj "ställ in" för att ange reservplagg som ska finnas. <span role="img" aria-label="hmm">😎</span></p>
+      return (
+      <tr>
+          <td>Välj "ställ in" för att ange reservplagg som ska finnas. <span role="img" aria-label="hmm">😎</span></td>
+      </tr>)
     }
     return Object.keys(target).map((el) => {
-      return <p key={target[el].name}>
-              {target[el].name}
-              {this.checkShortage(el)}
-              <button onClick={()=>this.props.addItem(el)}>+</button>
-            </p>
-            });
+      return (<tr>
+              <td key={target[el].name}>
+                {target[el].name}
+              </td>
+              <td>
+                {this.checkShortage(el)}
+              </td>
+              <td>
+                <button onClick={()=>this.props.addItem(el)}><h5>+</h5></button>
+              </td>
+            </tr>)
+        }
+      );
   }
 
   render(){
     return (
       <section id="missing">
-        <h1>Lämna</h1>
-        {this.renderAddList()}
+        <h2>Lämna</h2>
+        <table className="u-full-width">
+          <tbody>
+            {this.renderAddList()}
+          </tbody>
+        </table>
       </section>
     );
   }

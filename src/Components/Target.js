@@ -6,7 +6,8 @@ class Target extends Component{
   state = {target: this.props.target};
 
   saveBeforeToggle = () => {
-    this.props.setNewTarget(this.state.target, this.props.togglePage); 
+    this.props.setNewTarget(this.state.target); 
+    this.props.togglePage();
   }
 
   changeTarget = (e) => {
@@ -37,26 +38,32 @@ class Target extends Component{
 
   renderClothes = () => {
     return Object.keys(clothes).map((el)=>
-    <div key={el}>
-      <p>
-        {clothes[el].name}
-        <span>
+    <tr key={el}>
+      <td>{clothes[el].name}</td>
+      <td>
         {this.state.target[el] ? this.state.target[el].no : clothes[el].no }
-        </span>
+      </td>
+      <td>
         <button data-id={el} onClick={this.changeTarget}>+</button>
+      </td>
+      <td>
         <button data-id={el} onClick={this.changeTarget}>-</button>
-      </p>
-    </div>
+      </td>
+    </tr>
     )
   };
 
   render(){
     return (
       <section id="target">
-        <h1>Vilka extraplagg som ska finnas på förskolan?</h1>
-        <Button onClick={this.saveBeforeToggle} name="Ok" />
+        <h5>Vilka extraplagg ska finnas på förskolan?</h5>
+        <Button className="mr-2" onClick={this.saveBeforeToggle} name="Ok" />
         <Button onClick={this.props.togglePage} name="Avbryt" />
-        {this.renderClothes()}
+        <table className="u-full-width">
+          <tbody>
+            {this.renderClothes()}
+          </tbody>
+        </table>
       </section>
     );
   }

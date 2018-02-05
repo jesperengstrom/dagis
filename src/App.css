@@ -1,4 +1,28 @@
+html, body {
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .warning {
   color: red;
   background: #ffdede;
+}
+
+.warning, 
+.no-warning {
+  padding: 2px 6px;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mr-2 {
+  margin-right: 2rem; 
 }

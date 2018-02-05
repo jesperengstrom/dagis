@@ -12,34 +12,42 @@ class Status extends Component{
     
       //check for empty array here
       if (filteredKeys.length === 0) {
-        return <p>Tomt på hyllan! <span role="img" aria-label="help">😱</span></p>
+        return <tr><td>Tomt på hyllan! <span role="img" aria-label="help">😱</span></td></tr>
       
       //else do proper render
       } else {
         return filteredKeys.map((el) => {
-          return <p key={current[el].name}>
-                {current[el].name}: 
-                <span className={this.isShortage(current[el], target[el]) ? 'warning' : ''}> {current[el].no}</span>
-                {current[el].no > 0 ? <button onClick={()=> this.props.removeItem(el)}>-</button> : ''}
-              </p>
-              });
+          return (
+            <tr key={current[el].name}>
+              <td>{current[el].name}:</td>
+              <td>
+                <span className={this.isShortage(current[el], target[el]) ? 'warning' : 'no-warning'}> {current[el].no}</span>
+              </td>
+              <td>
+                {current[el].no > 0 ? <button onClick={()=> this.props.removeItem(el)}><h5>-</h5></button> : ''}
+              </td>
+            </tr>)
+        });
       }
-
-  }
+  };
 
   isShortage(current, target) {
     //maybe item is no longer in target, but remains in current
     if (target) {
       return current.no < target.no;
     } else return false;
-  }
+  };
 
 
   render(){
     return (
       <section id="status">
-        <h1>Hämta</h1>
-        {this.renderStatus()}
+        <h2>Hämta</h2>
+        <table className="u-full-width">
+          <tbody>
+            {this.renderStatus()}
+          </tbody>
+        </table>
       </section>
     )
   }
