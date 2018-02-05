@@ -6,7 +6,7 @@ class Add extends Component{
     let target = this.props.target[item].no;
     let current = this.props.current[item] ? this.props.current[item].no : 0;
     if (target > current){
-      return <span class="warning"> ({target - current} st saknas!)</span>;
+      return <span className="warning"> ({target - current} st saknas!)</span>;
     } else return false
   }
 

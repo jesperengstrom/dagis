@@ -44,7 +44,11 @@ class App extends Component {
 
   removeItem = (item) => {
     let current = {...this.state.current}
-    current[item].no = this.state.current[item].no - 1;
+    current[item].no = current[item].no - 1;
+    //if item is removed from target - remove it from current too (if it's 0)
+    if (!this.state.target[item] && current[item].no === 0) {
+      delete current[item];
+    }
     this.setState({current});
   };
 
