@@ -24,7 +24,7 @@ class Status extends Component{
                 <span className={this.isShortage(current[el], target[el]) ? 'warning' : 'no-warning'}> {current[el].no}</span>
               </td>
               <td>
-                {current[el].no > 0 ? <button onClick={()=> this.props.removeItem(el)}><h5>-</h5></button> : ''}
+                {current[el].no > 0 ? <button className="larger-text float-right" onClick={()=> this.props.removeItem(el)}>-</button> : ''}
               </td>
             </tr>)
         });
@@ -42,7 +42,7 @@ class Status extends Component{
   render(){
     return (
       <section id="status">
-        <h2>Hämta</h2>
+        <h3>Hämta</h3>
         <table className="u-full-width">
           <tbody>
             {this.renderStatus()}

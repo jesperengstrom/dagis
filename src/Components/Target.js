@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Button';
 import clothes from '../clothes';
+import PageHead from './PageHead'
 
 class Target extends Component{
   state = {target: this.props.target};
@@ -44,10 +45,10 @@ class Target extends Component{
         {this.state.target[el] ? this.state.target[el].no : clothes[el].no }
       </td>
       <td>
-        <button data-id={el} onClick={this.changeTarget}>+</button>
+        <button className="larger-text" data-id={el} onClick={this.changeTarget}>+</button>
       </td>
       <td>
-        <button data-id={el} onClick={this.changeTarget}>-</button>
+        <button className="larger-text" data-id={el} onClick={this.changeTarget}>-</button>
       </td>
     </tr>
     )
@@ -56,9 +57,11 @@ class Target extends Component{
   render(){
     return (
       <section id="target">
+        <PageHead name={this.props.name}>
+          <Button onClick={this.saveBeforeToggle} name="Spara" />
+          <Button onClick={this.props.togglePage} name="Avbryt" />
+        </PageHead>
         <h5>Vilka extraplagg ska finnas på förskolan?</h5>
-        <Button className="mr-2" onClick={this.saveBeforeToggle} name="Ok" />
-        <Button onClick={this.props.togglePage} name="Avbryt" />
         <table className="u-full-width">
           <tbody>
             {this.renderClothes()}

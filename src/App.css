@@ -1,9 +1,10 @@
 html, body {
-  margin: 0;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+}
+
+#root {
+  padding: 1rem;
+  margin: auto;
 }
 
 .warning {
@@ -16,13 +17,41 @@ html, body {
   padding: 2px 6px;
 }
 
-.flex-col-center {
+.flex {
   display: flex;
+}
+
+.flex-col {
   flex-direction: column;
+}
+
+.flex-center {
   justify-content: center;
   align-items: center;
 }
 
+.align-center {
+  align-items: center;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
 .mr-2 {
   margin-right: 2rem; 
+}
+
+.larger-text {
+  font-size: 2rem;
+}
+
+.float-right {
+  float: right;
+}
+
+@media screen and (min-width: 500px) {
+  #root {
+    width: 400px;
+  }
 }

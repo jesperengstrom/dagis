@@ -19,15 +19,15 @@ class Add extends Component{
       </tr>)
     }
     return Object.keys(target).map((el) => {
-      return (<tr>
-              <td key={target[el].name}>
+      return (<tr key={target[el].name}> 
+              <td>
                 {target[el].name}
               </td>
               <td>
                 {this.checkShortage(el)}
               </td>
               <td>
-                <button onClick={()=>this.props.addItem(el)}><h5>+</h5></button>
+                <button className="larger-text float-right" onClick={()=>this.props.addItem(el)}>+</button>
               </td>
             </tr>)
         }
@@ -37,7 +37,7 @@ class Add extends Component{
   render(){
     return (
       <section id="missing">
-        <h2>Lämna</h2>
+        <h3>Lämna</h3>
         <table className="u-full-width">
           <tbody>
             {this.renderAddList()}

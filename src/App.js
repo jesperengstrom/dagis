@@ -8,6 +8,7 @@ import Target from './Components/Target';
 import Button from './Components/Button';
 import Loading from './Components/Loading';
 import Signup from './Components/Signup';
+import PageHead from './Components/PageHead';
 import firebase from './firebase';
 
 class App extends Component {
@@ -19,7 +20,8 @@ class App extends Component {
     targetPage: false,
     loading: true,
     signup: false,
-    id: ''
+    id: '',
+    error: ''
   }
 
   componentDidMount(){
@@ -39,9 +41,11 @@ class App extends Component {
   firebaseListen = () => {
     firebase.database().ref('/' + this.state.id)
     .on('value', (snapshot) => {
-      let response = snapshot.val();
-      response.loading = false;
-      this.setState(response);
+      if (snapshot.val()) {
+        let response = snapshot.val();
+        response.loading = false;
+        this.setState(response);
+      } else this.setState({error: 'oops, hittar inget sådant barn'})
     })
   }
 
@@ -55,7 +59,9 @@ class App extends Component {
     alert('Välkommen! Bokmärk eller spara denna URL, det är din personliga sida. Tappar du bort den måste du börja om från början :(');
     let post = {}
     post['/' + this.state.id] = this.state;
-    firebase.database().ref().update(post);
+    firebase.database().ref()
+    .update(post)
+    .catch((error) => this.setState({error: 'Nåt gick fel! ' + error}));
     return this.firebaseListen();
   }
 
@@ -63,6 +69,7 @@ class App extends Component {
   updateDatabase = (update, dir) =>{
     firebase.database().ref('/' + this.state.id + '/' + dir)
     .set(update)
+    .catch((error) => this.setState({error: 'Problem med att skriva till databasen! ' + error}))
   }
 
   togglePage = () => {
@@ -103,13 +110,15 @@ class App extends Component {
     if (this.state.targetPage) {
       return (
         <div>
-          <Target target={this.state.target} togglePage={this.togglePage} setNewTarget={this.setNewTarget} /> 
+          <Target name={this.state.name} target={this.state.target} togglePage={this.togglePage} setNewTarget={this.setNewTarget} /> 
         </div>)
     }
     if (!this.state.targetPage) {
       return (
         <div>
-          <Button onClick={this.togglePage} name="Ställ in"/>
+          <PageHead name={this.state.name}>
+            <Button onClick={this.togglePage} name="Ställ in"/>
+          </PageHead>
           <Status current={this.state.current} target={this.state.target} removeItem={this.removeItem} />
           <Add current={this.state.current} target={this.state.target} addItem={this.addItem} />
         </div>
@@ -120,7 +129,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>{this.state.name}</h1>
+        {this.state.error && <h5 className="warning">{this.state.error}</h5>}
         {this.renderApp()}
       </div>
     );

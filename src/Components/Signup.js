@@ -16,11 +16,13 @@ class Signup extends Component{
 
   render(){
     return (
-      <div className="flex-col-center">
-        <h1>Välkommen, skriv in ditt barns namn!</h1>
+      <div className="flex flex-col flex-center">
+        <h4>Välkommen, skriv in ditt barns namn!</h4>
         <form onSubmit={this.onSubmit}>
-          <input type="text" value={this.state.name} onChange={this.onChange}/>
-          <input type="submit" value="OK" />
+          <div className="row">
+            <input type="text" value={this.state.name} onChange={this.onChange}/>
+            <input type="submit" value="OK" />
+          </div>
         </form>
       </div>
     )
