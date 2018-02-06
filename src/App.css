@@ -12,6 +12,10 @@ html, body {
   background: #ffdede;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .warning, 
 .no-warning {
   padding: 2px 6px;

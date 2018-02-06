@@ -24,7 +24,7 @@ class Status extends Component{
                 <span className={this.isShortage(current[el], target[el]) ? 'warning' : 'no-warning'}> {current[el].no}</span>
               </td>
               <td>
-                {current[el].no > 0 ? <button className="larger-text float-right" onClick={()=> this.props.removeItem(el)}>-</button> : ''}
+                <button className={`larger-text float-right ${current[el].no > 0 ? '' : 'hidden'}`} onClick={()=> this.props.removeItem(el)}>-</button>
               </td>
             </tr>)
         });

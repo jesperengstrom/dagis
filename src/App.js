@@ -67,8 +67,13 @@ class App extends Component {
 
 
   updateDatabase = (update, dir) =>{
-    firebase.database().ref('/' + this.state.id + '/' + dir)
-    .set(update)
+    let date = this.setDate();
+    let updateObj = {...this.state};
+    updateObj[dir] = update;
+    updateObj.date = date;
+    // firebase.database().ref('/' + this.state.id + '/' + dir)
+    firebase.database().ref('/' + this.state.id)
+    .set(updateObj)
     .catch((error) => this.setState({error: 'Problem med att skriva till databasen! ' + error}))
   }
 
@@ -98,6 +103,11 @@ class App extends Component {
 
   setNewTarget = (target) => {
     this.updateDatabase(target, 'target')
+  }
+
+  setDate = () => {
+    var today = new Date().toISOString().slice(0, 10);
+    return today;
   }
 
   renderApp = () => {
@@ -131,6 +141,7 @@ class App extends Component {
       <div className="App">
         {this.state.error && <h5 className="warning">{this.state.error}</h5>}
         {this.renderApp()}
+        {this.state.date && <p>Senast uppdaterad: {this.state.date}</p>}
       </div>
     );
   }
