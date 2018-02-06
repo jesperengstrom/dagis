@@ -141,7 +141,7 @@ class App extends Component {
       <div className="App">
         {this.state.error && <h5 className="warning">{this.state.error}</h5>}
         {this.renderApp()}
-        {this.state.date && <p>Senast uppdaterad: {this.state.date}</p>}
+        {this.state.date && <p>Senast uppdaterad: {this.state.date} | <a href="https://github.com/jesperengstrom/dagis">GH</a></p>}
       </div>
     );
   }
