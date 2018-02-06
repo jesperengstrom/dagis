@@ -17,7 +17,7 @@ class Signup extends Component{
   render(){
     return (
       <div className="flex flex-col flex-center">
-        <h4>Välkommen, skriv in ditt barns namn!</h4>
+        <h5>Välkommen, skriv in ditt barns namn!</h5>
         <form onSubmit={this.onSubmit}>
           <div className="row">
             <input type="text" value={this.state.name} onChange={this.onChange}/>

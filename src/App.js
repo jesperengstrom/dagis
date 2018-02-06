@@ -29,13 +29,16 @@ class App extends Component {
   }
 
   init = () => {
-    let id = window.location.pathname.slice(1);
+    let urlParams = new URLSearchParams(window.location.search);
+    // let id = window.location.pathname.slice(1);
     //no id in url -> signup
-    if (id === '') {
+    if (!urlParams.has('id')) {
       this.setState({signup: true})
     }
     //else set id and fetch data
-    else this.setState({id}, this.firebaseListen)
+    else {
+      let id = urlParams.get('id');
+      this.setState({id}, this.firebaseListen)}
   }
 
   firebaseListen = () => {
@@ -51,7 +54,11 @@ class App extends Component {
 
   createNewUser = (name) => {
     let id = firebase.database().ref().push().key;
-    window.history.pushState({}, 'Dagiskorgen', window.location + id);
+    let urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('id', id)
+    //push the new url to url bar -> prompt user to bookmark page
+    window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
+    // window.history.pushState({}, 'Dagiskorgen', window.location + id);
     this.setState({name, id, signup: false, loading: false}, this.welcomeUser);
   }
 
