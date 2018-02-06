@@ -10,6 +10,7 @@ import Loading from './Components/Loading';
 import Signup from './Components/Signup';
 import PageHead from './Components/PageHead';
 import firebase from './firebase';
+import URLSearchParams from  'url-search-params';
 
 class App extends Component {
   state = {
